@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C5FC0492B9CAC1100FA1C86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC0482B9CAC1100FA1C86 /* AppDelegate.swift */; };
 		9C5FC04B2B9CAC1100FA1C86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC04A2B9CAC1100FA1C86 /* SceneDelegate.swift */; };
-		9C5FC04D2B9CAC1100FA1C86 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC04C2B9CAC1100FA1C86 /* ViewController.swift */; };
+		9C5FC04D2B9CAC1100FA1C86 /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC04C2B9CAC1100FA1C86 /* TimerVC.swift */; };
 		9C5FC0502B9CAC1100FA1C86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C5FC04E2B9CAC1100FA1C86 /* Main.storyboard */; };
 		9C5FC0532B9CAC1100FA1C86 /* ChessClock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC0512B9CAC1100FA1C86 /* ChessClock.xcdatamodeld */; };
 		9C5FC0552B9CAC1200FA1C86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C5FC0542B9CAC1200FA1C86 /* Assets.xcassets */; };
@@ -20,7 +20,7 @@
 		9C5FC0452B9CAC1100FA1C86 /* ChessClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C5FC0482B9CAC1100FA1C86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C5FC04A2B9CAC1100FA1C86 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9C5FC04C2B9CAC1100FA1C86 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9C5FC04C2B9CAC1100FA1C86 /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
 		9C5FC04F2B9CAC1100FA1C86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C5FC0522B9CAC1100FA1C86 /* ChessClock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChessClock.xcdatamodel; sourceTree = "<group>"; };
 		9C5FC0542B9CAC1200FA1C86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 			children = (
 				9C5FC0482B9CAC1100FA1C86 /* AppDelegate.swift */,
 				9C5FC04A2B9CAC1100FA1C86 /* SceneDelegate.swift */,
-				9C5FC04C2B9CAC1100FA1C86 /* ViewController.swift */,
+				9C5FC04C2B9CAC1100FA1C86 /* TimerVC.swift */,
 				9C5FC04E2B9CAC1100FA1C86 /* Main.storyboard */,
 				9C5FC0542B9CAC1200FA1C86 /* Assets.xcassets */,
 				9C5FC0562B9CAC1200FA1C86 /* LaunchScreen.storyboard */,
@@ -141,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C5FC04D2B9CAC1100FA1C86 /* ViewController.swift in Sources */,
+				9C5FC04D2B9CAC1100FA1C86 /* TimerVC.swift in Sources */,
 				9C5FC0532B9CAC1100FA1C86 /* ChessClock.xcdatamodeld in Sources */,
 				9C5FC0492B9CAC1100FA1C86 /* AppDelegate.swift in Sources */,
 				9C5FC04B2B9CAC1100FA1C86 /* SceneDelegate.swift in Sources */,
