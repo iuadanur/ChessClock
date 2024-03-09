@@ -38,12 +38,20 @@ class TimerVC: UIViewController {
         secondView.isUserInteractionEnabled = true
         firstView.isUserInteractionEnabled = false
         
-        
+        firstView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
+        secondView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0))
+        secondLabel.textColor = UIColor.white
+        firstLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
     }
     @objc func GR2() {
         firstView.isUserInteractionEnabled = true
         secondView.isUserInteractionEnabled = false
         
+        secondView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0)) //GRAY
+        firstView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)) //GREEN
+        firstLabel.textColor = UIColor.white
+        secondLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0)) //Making gray again
+
     }
     func customizeButtons() {
         let configuration = UIImage.SymbolConfiguration(weight: .heavy)
