@@ -14,6 +14,7 @@
 		9C5FC0532B9CAC1100FA1C86 /* ChessClock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC0512B9CAC1100FA1C86 /* ChessClock.xcdatamodeld */; };
 		9C5FC0552B9CAC1200FA1C86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C5FC0542B9CAC1200FA1C86 /* Assets.xcassets */; };
 		9C5FC0582B9CAC1200FA1C86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C5FC0562B9CAC1200FA1C86 /* LaunchScreen.storyboard */; };
+		9C627BEC2BACD3A700A78CDC /* SwiftAlertView in Frameworks */ = {isa = PBXBuildFile; productRef = 9C627BEB2BACD3A700A78CDC /* SwiftAlertView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C627BEC2BACD3A700A78CDC /* SwiftAlertView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +88,9 @@
 			dependencies = (
 			);
 			name = ChessClock;
+			packageProductDependencies = (
+				9C627BEB2BACD3A700A78CDC /* SwiftAlertView */,
+			);
 			productName = ChessClock;
 			productReference = 9C5FC0452B9CAC1100FA1C86 /* ChessClock.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +119,9 @@
 				Base,
 			);
 			mainGroup = 9C5FC03C2B9CAC1100FA1C86;
+			packageReferences = (
+				9C627BEA2BACD3A700A78CDC /* XCRemoteSwiftPackageReference "SwiftAlertView" */,
+			);
 			productRefGroup = 9C5FC0462B9CAC1100FA1C86 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -362,6 +370,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9C627BEA2BACD3A700A78CDC /* XCRemoteSwiftPackageReference "SwiftAlertView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dinhquan/SwiftAlertView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9C627BEB2BACD3A700A78CDC /* SwiftAlertView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C627BEA2BACD3A700A78CDC /* XCRemoteSwiftPackageReference "SwiftAlertView" */;
+			productName = SwiftAlertView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9C5FC0512B9CAC1100FA1C86 /* ChessClock.xcdatamodeld */ = {
