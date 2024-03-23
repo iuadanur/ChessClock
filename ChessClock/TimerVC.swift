@@ -22,6 +22,9 @@ class TimerVC: UIViewController {
     @IBOutlet weak var clockButton: UIButton!
     @IBOutlet weak var soundButton: UIButton!
     
+    @IBOutlet weak var firstViewMovesLabel: UILabel!
+    @IBOutlet weak var secondViewMovesLabel: UILabel!
+    
     var isPaused = false
     var isMuted = false
     
@@ -37,17 +40,25 @@ class TimerVC: UIViewController {
     var counter2S = 60
     
     var isTurnFirstUser: Bool?
+    var isFirstMove = true
+    
+    var movesCountFirst = 0
+    var movesCountSecond = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        firstLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        firstViewMovesLabel.transform = CGAffineTransform(rotationAngle: .pi)
+        firstLabel.transform = CGAffineTransform(rotationAngle: .pi)
         firstLabel.text = "\(counter1+1):0"
         secondLabel.text = "\(counter2+1):0"
         
         customizeButtons()
         firstView.isUserInteractionEnabled = true
         secondView.isUserInteractionEnabled = true
+        
+        firstViewMovesLabel.text = "Moves:\(movesCountFirst)"
+        secondViewMovesLabel.text = "Moves:\(movesCountSecond)"
         
         let gr1 = UITapGestureRecognizer(target: self, action: #selector(GR1))
                 firstView.addGestureRecognizer(gr1)
@@ -97,6 +108,12 @@ class TimerVC: UIViewController {
         timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(secondTimer), userInfo: nil, repeats: true)
         
         isTurnFirstUser = false
+        if isFirstMove {
+            isFirstMove = false
+        } else {
+            movesCountFirst += 1
+            updateCountLabel()
+        }
         
         firstView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
         secondView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0))
@@ -110,6 +127,13 @@ class TimerVC: UIViewController {
         
         isTurnFirstUser = true
         
+        if isFirstMove {
+            isFirstMove = false
+        } else {
+            movesCountSecond += 1
+            updateCountLabel()
+        }
+        
         secondView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0)) //GRAY
         firstView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)) //GREEN
         firstLabel.textColor = UIColor.white
@@ -118,6 +142,11 @@ class TimerVC: UIViewController {
         timer2.invalidate()
                 
         timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(firstTimer), userInfo: nil, repeats: true)
+    }
+    
+    func updateCountLabel() {
+        firstViewMovesLabel.text = "Moves:\(movesCountFirst)"
+        secondViewMovesLabel.text = "Moves:\(movesCountSecond)"
     }
     func customizeButtons() {
         let configuration = UIImage.SymbolConfiguration(weight: .heavy)

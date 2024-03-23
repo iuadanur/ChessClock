@@ -32,9 +32,18 @@
                                                         <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moves: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJq-bt-cwI">
+                                                        <rect key="frame" x="8" y="343" width="97" height="23"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                        <color key="textColor" red="0.32549019607843138" green="0.32156862745098036" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.54117647058823526" green="0.53725490196078429" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="aJq-bt-cwI" secondAttribute="trailing" constant="288" id="J6h-9w-KLq"/>
+                                                    <constraint firstItem="aJq-bt-cwI" firstAttribute="leading" secondItem="KZo-Fs-eoA" secondAttribute="leading" constant="8" id="co7-5S-fOE"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aJq-bt-cwI" secondAttribute="bottom" constant="22.666666666666686" id="lWa-eO-Sav"/>
                                                     <constraint firstItem="0ck-LZ-l0U" firstAttribute="centerX" secondItem="KZo-Fs-eoA" secondAttribute="centerX" id="pxx-mX-GIv"/>
                                                     <constraint firstItem="0ck-LZ-l0U" firstAttribute="centerY" secondItem="KZo-Fs-eoA" secondAttribute="centerY" id="uta-bm-i3M"/>
                                                 </constraints>
@@ -48,10 +57,19 @@
                                                         <color key="textColor" red="0.1294117719" green="0.1294117719" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moves: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJA-jf-vdC">
+                                                        <rect key="frame" x="288" y="21" width="97" height="23"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                        <color key="textColor" red="0.32549019607843138" green="0.32156862745098036" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.54117647058823526" green="0.53725490196078429" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
+                                                    <constraint firstItem="OJA-jf-vdC" firstAttribute="top" secondItem="vjt-GD-kkt" secondAttribute="top" constant="21" id="1cy-g0-xha"/>
                                                     <constraint firstItem="Ank-Qp-NmI" firstAttribute="centerX" secondItem="vjt-GD-kkt" secondAttribute="centerX" id="IQX-jD-vYD"/>
+                                                    <constraint firstItem="OJA-jf-vdC" firstAttribute="leading" secondItem="vjt-GD-kkt" secondAttribute="leading" constant="288" id="kgV-tY-93V"/>
+                                                    <constraint firstAttribute="trailing" secondItem="OJA-jf-vdC" secondAttribute="trailing" constant="8" id="tAf-tS-btl"/>
                                                     <constraint firstItem="Ank-Qp-NmI" firstAttribute="centerY" secondItem="vjt-GD-kkt" secondAttribute="centerY" id="tBm-5T-UvU"/>
                                                 </constraints>
                                             </view>
@@ -167,11 +185,13 @@
                         <outlet property="clockButton" destination="D3V-eI-W4m" id="BMx-81-OXe"/>
                         <outlet property="firstLabel" destination="0ck-LZ-l0U" id="jdt-Hb-lb2"/>
                         <outlet property="firstView" destination="KZo-Fs-eoA" id="K2B-F4-Gp8"/>
+                        <outlet property="firstViewMovesLabel" destination="aJq-bt-cwI" id="JzM-DF-ZCt"/>
                         <outlet property="middleBar" destination="Pm7-T1-x9h" id="dnM-tP-F3l"/>
                         <outlet property="pauseButton" destination="7Po-gJ-ira" id="eYN-Fb-Oi3"/>
                         <outlet property="restartButton" destination="vef-ax-kEw" id="kV9-Se-GcX"/>
                         <outlet property="secondLabel" destination="Ank-Qp-NmI" id="6vE-Ea-hLT"/>
                         <outlet property="secondView" destination="vjt-GD-kkt" id="F8d-Yf-UHc"/>
+                        <outlet property="secondViewMovesLabel" destination="OJA-jf-vdC" id="r5B-5D-XJQ"/>
                         <outlet property="soundButton" destination="XIT-bD-BFh" id="AX8-bv-lQe"/>
                     </connections>
                 </viewController>
