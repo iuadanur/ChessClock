@@ -25,6 +25,9 @@ class TimerVC: UIViewController {
     @IBOutlet weak var firstViewMovesLabel: UILabel!
     @IBOutlet weak var secondViewMovesLabel: UILabel!
     
+    @IBOutlet weak var firstSettingsButton: UIButton!
+    @IBOutlet weak var secondSettingsButton: UIButton!
+    
     var isPaused = false
     var isMuted = false
     
@@ -45,9 +48,20 @@ class TimerVC: UIViewController {
     var movesCountFirst = 0
     var movesCountSecond = 0
     
+    var firstButtonTopConstraint: NSLayoutConstraint!
+    var secondButtonBottomConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold, scale: .large)
+        let sliderImage = UIImage(systemName: "slider.horizontal.3", withConfiguration: largeConfig)
+
+        firstSettingsButton.setImage(sliderImage, for: .normal)
+        secondSettingsButton.setImage(sliderImage, for: .normal)
+        firstSettingsButton.tintColor = UIColor(cgColor: CGColor(red: 35.0 / 255.0, green: 35.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0))
+        secondSettingsButton.tintColor = UIColor(cgColor: CGColor(red: 35.0 / 255.0, green: 35.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0))
+        
+        firstSettingsButton.transform = CGAffineTransform(rotationAngle: .pi)
         firstViewMovesLabel.transform = CGAffineTransform(rotationAngle: .pi)
         firstLabel.transform = CGAffineTransform(rotationAngle: .pi)
         firstLabel.text = "\(counter1+1):0"
@@ -64,7 +78,33 @@ class TimerVC: UIViewController {
                 firstView.addGestureRecognizer(gr1)
         let gr2 = UITapGestureRecognizer(target: self, action: #selector(GR2))
                 secondView.addGestureRecognizer(gr2)
+        
+        firstButtonTopConstraint = firstSettingsButton.topAnchor.constraint(equalTo: firstView.topAnchor, constant: -170)
+        secondButtonBottomConstraint = secondSettingsButton.bottomAnchor.constraint(equalTo: secondView.bottomAnchor, constant: 170)
+        //Set active the constraints
+        NSLayoutConstraint.activate([
+            firstButtonTopConstraint,
+            secondButtonBottomConstraint
+        ])
+
     }
+    
+    func animateButtonsIn() {
+        UIView.animate(withDuration: 0.3) {
+            self.firstButtonTopConstraint.constant = 95
+            self.secondButtonBottomConstraint.constant = -95
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func animateButtonsOut() {
+        UIView.animate(withDuration: 0.3) {
+            self.firstButtonTopConstraint.constant = -170
+            self.secondButtonBottomConstraint.constant = 170
+            self.view.layoutIfNeeded()
+        }
+    }
+
     @objc func firstTimer() {
            
            counter1S -= 1
@@ -114,7 +154,6 @@ class TimerVC: UIViewController {
             movesCountFirst += 1
             updateCountLabel()
         }
-        
         firstView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
         secondView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0))
         secondLabel.textColor = UIColor.white
@@ -201,6 +240,7 @@ class TimerVC: UIViewController {
     @IBAction func pauseButtonClicked(_ sender: Any) {
         isPaused.toggle()
         if isPaused {
+            animateButtonsIn()
             pauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)
             if isTurnFirstUser == true {
                 timer1.invalidate()
@@ -214,6 +254,7 @@ class TimerVC: UIViewController {
                 secondLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
             }
         } else {
+            animateButtonsOut()
             pauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)
             if isTurnFirstUser == true {
                 timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(firstTimer), userInfo: nil, repeats: true)
@@ -240,7 +281,13 @@ class TimerVC: UIViewController {
             soundButton.setImage(UIImage(systemName: "speaker.wave.2", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)        }
     }
     
+    @IBAction func firstSettingButtonClicked(_ sender: Any) {
+        print("asd1")
+    }
     
+    @IBAction func secondSettingButtonClicked(_ sender: Any) {
+        print("asd2")
+    }
     
 }
 
