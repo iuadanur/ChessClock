@@ -79,8 +79,8 @@ class TimerVC: UIViewController {
         let gr2 = UITapGestureRecognizer(target: self, action: #selector(GR2))
                 secondView.addGestureRecognizer(gr2)
         
-        firstButtonTopConstraint = firstSettingsButton.topAnchor.constraint(equalTo: firstView.topAnchor, constant: -170)
-        secondButtonBottomConstraint = secondSettingsButton.bottomAnchor.constraint(equalTo: secondView.bottomAnchor, constant: 170)
+        firstButtonTopConstraint = firstSettingsButton.topAnchor.constraint(equalTo: firstView.topAnchor, constant: -400)
+        secondButtonBottomConstraint = secondSettingsButton.bottomAnchor.constraint(equalTo: secondView.bottomAnchor, constant: 400)
         //Set active the constraints
         NSLayoutConstraint.activate([
             firstButtonTopConstraint,
@@ -99,8 +99,8 @@ class TimerVC: UIViewController {
     
     func animateButtonsOut() {
         UIView.animate(withDuration: 0.3) {
-            self.firstButtonTopConstraint.constant = -170
-            self.secondButtonBottomConstraint.constant = 170
+            self.firstButtonTopConstraint.constant = -400
+            self.secondButtonBottomConstraint.constant = 400
             self.view.layoutIfNeeded()
         }
     }
@@ -137,14 +137,24 @@ class TimerVC: UIViewController {
                
            }
     }
-    
+    func GR1Helper() {
+        if isPaused {
+            pauseButtonClickedHelper()
+        }
+    }
     @objc func GR1() {
+        guard movesCountFirst <= movesCountSecond else {GR1Helper(); return}
+        if !isFirstMove {
+            if isPaused {
+               pauseButtonClickedHelper()
+                return
+            }
+        }
         pauseButton.isHidden = false
         secondView.isUserInteractionEnabled = true
-        firstView.isUserInteractionEnabled = false
+//        firstView.isUserInteractionEnabled = false
         
         timer1.invalidate()
-                
         timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(secondTimer), userInfo: nil, repeats: true)
         
         isTurnFirstUser = false
@@ -159,10 +169,24 @@ class TimerVC: UIViewController {
         secondLabel.textColor = UIColor.white
         firstLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
     }
+    func GR2Helper() {
+        if isPaused {
+            pauseButtonClickedHelper()
+        }
+    }
     @objc func GR2() {
+        guard movesCountSecond <= movesCountFirst else {
+            GR2Helper(); return}
+        if !isFirstMove {
+            if isPaused {
+                
+                pauseButtonClickedHelper()
+                return
+            }
+        }
         pauseButton.isHidden = false
         firstView.isUserInteractionEnabled = true
-        secondView.isUserInteractionEnabled = false
+//        secondView.isUserInteractionEnabled = false
         
         isTurnFirstUser = true
         
@@ -207,6 +231,38 @@ class TimerVC: UIViewController {
             timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(secondTimer), userInfo: nil, repeats: true)
         }
     }
+    func pauseButtonClickedHelper() {
+        isPaused.toggle()
+        if isPaused {
+            animateButtonsIn()
+            pauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)
+            if isTurnFirstUser == true {
+                timer1.invalidate()
+                
+                firstView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
+                firstLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
+            } else {
+                timer2.invalidate()
+                
+                secondView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
+                secondLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
+            }
+        } else {
+            animateButtonsOut()
+            pauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)
+            if isTurnFirstUser == true {
+                timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(firstTimer), userInfo: nil, repeats: true)
+                
+                firstView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)) //GREEN
+                firstLabel.textColor = UIColor.white
+            } else {
+                timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(secondTimer), userInfo: nil, repeats: true)
+                
+                secondView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0))
+                secondLabel.textColor = UIColor.white
+            }
+        }
+    }
     
     @IBAction func restartButtonClicked(_ sender: Any) {
         let alert = UIAlertController(title: "Reset Clock", message: nil, preferredStyle: .actionSheet)
@@ -238,36 +294,7 @@ class TimerVC: UIViewController {
     }
     
     @IBAction func pauseButtonClicked(_ sender: Any) {
-        isPaused.toggle()
-        if isPaused {
-            animateButtonsIn()
-            pauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)
-            if isTurnFirstUser == true {
-                timer1.invalidate()
-                firstView.isUserInteractionEnabled = false
-                firstView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
-                firstLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
-            } else {
-                timer2.invalidate()
-                secondView.isUserInteractionEnabled = false
-                secondView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
-                secondLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
-            }
-        } else {
-            animateButtonsOut()
-            pauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)
-            if isTurnFirstUser == true {
-                timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(firstTimer), userInfo: nil, repeats: true)
-                firstView.isUserInteractionEnabled = true
-                firstView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)) //GREEN
-                firstLabel.textColor = UIColor.white
-            } else {
-                timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(secondTimer), userInfo: nil, repeats: true)
-                secondView.isUserInteractionEnabled = true
-                secondView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0))
-                secondLabel.textColor = UIColor.white
-            }
-        }
+        pauseButtonClickedHelper()
     }
     
     @IBAction func clockButtonClicked(_ sender: Any) {
