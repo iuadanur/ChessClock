@@ -33,7 +33,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2I-pf-ekh">
-                                                        <rect key="frame" x="171" y="104.66666666666667" width="51" height="34.333333333333329"/>
+                                                        <rect key="frame" x="171" y="104" width="51" height="35"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="slider.horizontal.3" catalog="system"/>
                                                         <connections>
@@ -56,7 +56,7 @@
                                                     <constraint firstItem="0ck-LZ-l0U" firstAttribute="centerY" secondItem="KZo-Fs-eoA" secondAttribute="centerY" constant="30" id="k6H-7K-xDX"/>
                                                     <constraint firstAttribute="bottom" secondItem="aJq-bt-cwI" secondAttribute="bottom" constant="21.666666666666686" id="lWa-eO-Sav"/>
                                                     <constraint firstItem="0ck-LZ-l0U" firstAttribute="centerX" secondItem="KZo-Fs-eoA" secondAttribute="centerX" id="uLB-RQ-dIy"/>
-                                                    <constraint firstItem="D2I-pf-ekh" firstAttribute="top" secondItem="KZo-Fs-eoA" secondAttribute="top" constant="104.67" id="yw2-tS-R0k"/>
+                                                    <constraint firstItem="D2I-pf-ekh" firstAttribute="top" secondItem="KZo-Fs-eoA" secondAttribute="top" constant="104" id="yw2-tS-R0k"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjt-GD-kkt" userLabel="secondView">
@@ -258,7 +258,7 @@
         <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
         <image name="clock" catalog="system" width="128" height="123"/>
         <image name="pause.fill" catalog="system" width="117" height="128"/>
-        <image name="slider.horizontal.3" catalog="system" width="128" height="99"/>
+        <image name="slider.horizontal.3" catalog="system" width="32" height="32"/>
         <image name="speaker.wave.2" catalog="system" width="128" height="88"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

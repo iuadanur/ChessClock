@@ -144,6 +144,7 @@ class TimerVC: UIViewController {
     }
     @objc func GR1() {
         guard movesCountFirst <= movesCountSecond else {GR1Helper(); return}
+        firstView.isUserInteractionEnabled = false
         if !isFirstMove {
             if isPaused {
                pauseButtonClickedHelper()
@@ -177,6 +178,7 @@ class TimerVC: UIViewController {
     @objc func GR2() {
         guard movesCountSecond <= movesCountFirst else {
             GR2Helper(); return}
+        secondView.isUserInteractionEnabled = false
         if !isFirstMove {
             if isPaused {
                 
@@ -255,11 +257,13 @@ class TimerVC: UIViewController {
                 
                 firstView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)) //GREEN
                 firstLabel.textColor = UIColor.white
+                firstView.isUserInteractionEnabled = true
             } else {
                 timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(secondTimer), userInfo: nil, repeats: true)
                 
                 secondView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0))
                 secondLabel.textColor = UIColor.white
+                secondView.isUserInteractionEnabled = true
             }
         }
     }
