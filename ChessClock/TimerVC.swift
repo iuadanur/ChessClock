@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftAlertView
+import AVFoundation
 
 class TimerVC: UIViewController {
 
@@ -28,6 +29,8 @@ class TimerVC: UIViewController {
     @IBOutlet weak var firstSettingsButton: UIButton!
     @IBOutlet weak var secondSettingsButton: UIButton!
     
+    var audioPlayer: AVAudioPlayer?
+    
     var isPaused = false
     var isMuted = false
     
@@ -35,12 +38,12 @@ class TimerVC: UIViewController {
     var timer2 = Timer()
         
     var counter1 = 0
-    var counter1S = 60
+    var counter1S = 5
         
     var plus = 0
         
     var counter2 = 0
-    var counter2S = 60
+    var counter2S = 5
     
     var isTurnFirstUser: Bool?
     var isFirstMove = true
@@ -88,6 +91,18 @@ class TimerVC: UIViewController {
         ])
 
     }
+    func playMoveSound(name: String) {
+        if isMuted { return }
+        
+        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else { return }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch {
+            print("Ses çalarken bir hata oluştu: \(error)")
+        }
+    }
     
     func animateButtonsIn() {
         UIView.animate(withDuration: 0.3) {
@@ -115,6 +130,14 @@ class TimerVC: UIViewController {
                
                if counter1 == 0 {
                    timer1.invalidate()
+                   
+                   firstView.backgroundColor = UIColor.red
+                   firstLabel.textColor = UIColor.white
+                   
+                   firstView.isUserInteractionEnabled = false
+                   pauseButton.isUserInteractionEnabled = false
+                   
+                   playMoveSound(name: "gameEnded")
                }else{
                    counter1 -= 1
                }
@@ -131,6 +154,14 @@ class TimerVC: UIViewController {
                
                if counter2 == 0 {
                    timer2.invalidate()
+                   
+                   secondView.backgroundColor = UIColor.red
+                   secondLabel.textColor = UIColor.white
+                   
+                   secondView.isUserInteractionEnabled = false
+                   pauseButton.isUserInteractionEnabled = false
+                   
+                   playMoveSound(name: "gameEnded")
                }else{
                    counter2 -= 1
                }
@@ -164,6 +195,7 @@ class TimerVC: UIViewController {
         } else {
             movesCountFirst += 1
             updateCountLabel()
+            playMoveSound(name: "player1")
         }
         firstView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
         secondView.backgroundColor = UIColor(cgColor: CGColor(red: 128.0 / 255.0, green: 182.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0))
@@ -197,6 +229,7 @@ class TimerVC: UIViewController {
         } else {
             movesCountSecond += 1
             updateCountLabel()
+            playMoveSound(name: "player2")
         }
         
         secondView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0)) //GRAY
@@ -243,11 +276,14 @@ class TimerVC: UIViewController {
                 
                 firstView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
                 firstLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
+                secondView.isUserInteractionEnabled = true
             } else {
                 timer2.invalidate()
                 
                 secondView.backgroundColor = UIColor(cgColor: CGColor(red: 138.0 / 255.0, green: 137.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0))
                 secondLabel.textColor = UIColor(cgColor: CGColor(red: 33.0 / 255.0, green: 33.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0))
+                firstView.isUserInteractionEnabled = true
+
             }
         } else {
             animateButtonsOut()
@@ -269,34 +305,17 @@ class TimerVC: UIViewController {
     }
     
     @IBAction func restartButtonClicked(_ sender: Any) {
-        let alert = UIAlertController(title: "Reset Clock", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Reset Clock", message: nil, preferredStyle: .actionSheet)
+
+        let confirmAction = UIAlertAction(title: "Confirm", style: .destructive, handler: {action in})
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {action in})
+       
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        self.present(alertController, animated: true, completion: nil)
         
-//        let subview = alert.view.subviews.first! as UIView
-//        let alertContentView = subview.subviews.first! as UIView
-//        alertContentView.backgroundColor = UIColor.black
-        
-//        alert.view.tintColor = .darkText
-//        alert.view.backgroundColor = UIColor.black
-        
-//        SwiftAlertView.show(title: "Reset Clock",
-//                            message: nil,
-//                            buttonTitles: "OK", "Cancel") { alert in
-//            alert.titleLabel.textColor = .white
-//            alert.backgroundColor = .black
-//            alert.buttonTitleColor = .white
-//            alert.isDismissOnOutsideTapped = true
-//        }
-        
-        let confirmButton = UIAlertAction(title: "Confirm", style: .destructive) { (action) in
-                 
-        }
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(confirmButton)
-        alert.addAction(cancelButton)
-        present(alert, animated: true)
     }
-    
     @IBAction func pauseButtonClicked(_ sender: Any) {
         pauseButtonClickedHelper()
     }
@@ -308,6 +327,7 @@ class TimerVC: UIViewController {
         isMuted.toggle()
         if isMuted {
             soundButton.setImage(UIImage(systemName: "speaker.slash", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)
+            audioPlayer?.stop()
         } else {
             soundButton.setImage(UIImage(systemName: "speaker.wave.2", withConfiguration: UIImage.SymbolConfiguration(weight: .heavy)), for: .normal)        }
     }
